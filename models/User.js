@@ -1,7 +1,7 @@
 //require mongoose
 const { Schema, model } = require('mongoose');
 
-//guidelings to set up models and API routes
+//guidelines to set up models and API routes
 const UserSchema = new Schema(
     {
         username: {
@@ -27,7 +27,7 @@ const UserSchema = new Schema(
         }],
         friends: [{
             type: Schema.Types.ObjectId,
-            ref: 'ThouUserght'
+            ref: 'User'
         }]
     },
     {
@@ -41,7 +41,7 @@ const UserSchema = new Schema(
 
 //Schema settings
 UserSchema.virtual('friendCount').get(function () {
-    return this.friends.length
+    return this.friends.length;
 })
 
 //export model
