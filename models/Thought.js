@@ -1,7 +1,7 @@
 //require mongoose
 const { Schema, model, Types } = require('mongoose');
 
-//guidelines to set up models and API routes
+//guidelines to set up reaction schema
 const ReactionSchema = new Schema(
     {
         reactionId: {
@@ -31,6 +31,7 @@ const ReactionSchema = new Schema(
     }
 );
 
+//guidelines to set up thought schema
 const ThoughtSchema = new Schema(
     {
         ThoughtSchema: {
