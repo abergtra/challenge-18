@@ -1,4 +1,4 @@
-//require expressfor routing api
+//require express for routing api
 const router = require('express').Router();
 
 //connect to functions in controller
