@@ -25,3 +25,6 @@ const userController = {
 
     }
 }
+
+//export controller
+module.exports = userController

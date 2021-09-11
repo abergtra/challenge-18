@@ -22,3 +22,6 @@ const thoughtController = {
         
     }
 }
+
+//export controller
+module.exports = thoughtController
