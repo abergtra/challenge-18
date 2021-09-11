@@ -1,5 +1,5 @@
 //Import User and Thought models
-const { User, thought } = require('../models');
+const { User, Thought } = require('../models');
 
 //User functions
 const userController = {
@@ -22,6 +22,6 @@ const userController = {
 
     },
     deleteFriend({ params }, res){
-        
+
     }
 }
