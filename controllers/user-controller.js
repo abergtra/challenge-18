@@ -97,13 +97,20 @@ const userController = {
         });
     },
     deleteFriend({ params }, res){
-        Thought.findOneAndUpdate(
-            { _id: params.thoughtId },
-            { $push: { reactions: { reactionId: params.reactionId } } },
-            { new: true }
+        User.findByIDAndUpdate(
+            { _id: params.id },
+            { $pull: { friends: params.friendId } },
+            { new: true, runValidators: true }
         )
-        .then(dbUserData => res.json(dbUserData))
-        .catch(err => res.json(err));
+        .select("-__v")
+        .then((dbUserData) => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'Cannot find friend with this id.' });
+                return;
+            }
+            res.json(dbUserData);
+        })
+        .catch((err) => res.status(400).json(err));
     }
 }
 
