@@ -44,18 +44,17 @@ const userController = {
         });
     },
     updateUser({ params, body }, res) {
-        Thought.findOne({ _id: params.thoughtID})
-        .select("-__v")
-        .then((dbThoughtData) => {
-            if (!dbThoughtData) {
-                res.status(404).json({ message: "Cannot find thought with this id."});
-                return;
-            } res.json(dbThoughtData);
+        User.findOne({ _id: params.id}, body, {
+            new: true,
+            runValidators: true,
         })
-        .catch((err) => {
-            console.log(err);
-            res.status(400).json(err);
-        });
+        .then((dbUserData) => {
+            if (!dbUserData) {
+                res.status(404).json({ message: "Cannot find user with this id."});
+                return;
+            } res.json(dbUserData);
+        })
+        .catch((err) => res.status(400).json(err));
     },
     deleteUser({ params }, res) {
         Thought.findOneAndDelete({ _id: params.thoughtID})
