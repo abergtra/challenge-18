@@ -69,22 +69,19 @@ const thoughtController = {
     //add a new reaction
     addReaction({ params, body }, res) {
         console.log("INCOMING BODY", body)
-        Thought.create(body)
-            .then(({ _id }) => {
-                return User.findOneAndUpdate(
-                    { _id: params.userId },
-                    { $push: { thoughts: _id } },
-                    { new: true }
-                );
-            })
-            .then(dbUserData => {
-                if (!dbUserData) {
-                    res.status(404).json({ message: 'No User found with this id! first error' });
-                    return;
-                }
-                res.json(dbUserData);
-            })
-            .catch(err => res.json(err));
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $push: { reactions: body } },
+            { new: true }
+        )
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'Cannot find user with this id.' });
+                return;
+            }
+            res.json(dbUserData);
+        })
+        .catch(err => res.json(err));
     },
     //delete and existing reactioin
     deleteReaction({ params }, res){
