@@ -83,9 +83,22 @@ const thoughtController = {
         })
         .catch(err => res.json(err));
     },
-    //delete and existing reactioin
+    //delete an existing reactioin
     deleteReaction({ params }, res){
-        
+        console.log("INCOMING BODY", body)
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $push: { reactions: body } },
+            { new: true }
+        )
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'Cannot find user with this id.' });
+                return;
+            }
+            res.json(dbUserData);
+        })
+        .catch(err => res.json(err));
     }
 }
 
