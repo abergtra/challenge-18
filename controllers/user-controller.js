@@ -7,7 +7,7 @@ const userController = {
         User.find({})
         .populate({
             path: 'thoughts',
-            select: ("-__v")
+            select: "-__v"
         })
         .select("-__v")
         .then((dbUserData) => res.json(dbUserData))
@@ -17,14 +17,17 @@ const userController = {
         });
     },
     getUserByID({ params }, res) {
-        console.log("retrieved params", params)
-        Thought.findOne({ _id: params.thoughtID})
+        User.findOne({ _id: params.id })
+        .populate({
+            path: 'thoughts',
+            select: "-__v"
+        })
         .select("-__v")
-        .then((dbThoughtData) => {
-            if (!dbThoughtData) {
-                res.status(404).json({ message: "Cannot find thought with this id."});
+        .then((dbUserData) => {
+            if (!dbUserData) {
+                res.status(404).json({ message: "Cannot find user with this id."});
                 return;
-            } res.json(dbThoughtData);
+            } res.json(dbUserData);
         })
         .catch((err) => {
             console.log(err);
@@ -32,22 +35,13 @@ const userController = {
         });
     },
     createNewUser({ body }, res) {
-        console.log("INCOMING BODY", body)
-        Thought.create(body)
-        .then(({ _id }) => {
-            return User.findOneAndUpdate(
-                { _id: params.userId },
-                { $push: { thoughts: _id } },
-                { new: true }
-            );
-        })
-        .then((dbUserData) => {
-            if (!dbUserData) {
-                res.status(404).json({ message: "Cannot find user with this id."});
-                return;
-            } res.json(dbUserData);
-        })
-        .catch((err) => res.json(err));
+        console.log("BODY OBJECT", body)
+        User.create(body)
+        .then(dbUserData => res.json(dbUserData))
+        .catch((err) => {
+            console.log(err);
+            res.status(400).json(err);
+        });
     },
     updateUser({ params, body }, res) {
         Thought.findOne({ _id: params.thoughtID})
