@@ -79,12 +79,12 @@ const userController = {
         .catch((err) => res.status(400).json(err));
     },
     addFriend({ params }, res) {
-        console.log("INCOMING BODY", body)
-        Thought.findOneAndUpdate(
-            { _id: params.thoughtId },
-            { $push: { reactions: body } },
+        User.findByIDAndUpdate(
+            { _id: params.id },
+            { $addToSet: { friends: params.friendId } },
             { new: true }
         )
+        .select("-__v")
         .then(dbUserData => {
             if (!dbUserData) {
                 res.status(404).json({ message: 'Cannot find user with this id.' });
@@ -92,7 +92,9 @@ const userController = {
             }
             res.json(dbUserData);
         })
-        .catch(err => res.json(err));
+        .catch((err) => {
+            res.status(400).json(err);
+        });
     },
     deleteFriend({ params }, res){
         Thought.findOneAndUpdate(
