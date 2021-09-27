@@ -51,19 +51,20 @@ const thoughtController = {
     },
     //delete an existing thought
     deleteThought({ params }, res) {
-        console.log("retrieved params", params)
-        Thought.findOne({ _id: params.thoughtID})
-        .select("-__v")
-        .then((dbThoughtData) => {
-            if (!dbThoughtData) {
-                res.status(404).json({ message: "Cannot find thought with this id."});
-                return;
-            } res.json(dbThoughtData);
+        Thought.findOneAndDelete({ _id: params.thoughtID})
+        .then(deletedthought => {
+            if (!deletedthought) {
+                return res.status(404).json({ message: "Cannot find thought with this id."});
+            } return User.findOneAndUpdate(
+                { _id: params.username },
+                { $pull: { thoughts: params.thoughtId } },
+                { new: true }
+            );
         })
-        .catch((err) => {
-            console.log(err);
-            res.status(400).json(err);
-        });
+        .then(dbUserData => {
+            res.json(dbUserData);
+        })
+        .catch(err => res.json(err));
     },
     //add a new reaction
     addReaction({ params, body }, res) {
