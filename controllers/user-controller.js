@@ -57,20 +57,26 @@ const userController = {
         .catch((err) => res.status(400).json(err));
     },
     deleteUser({ params }, res) {
-        Thought.findOneAndDelete({ _id: params.thoughtID})
-        .then(deletedthought => {
-            if (!deletedthought) {
-                return res.status(404).json({ message: "Cannot find thought with this id."});
-            } return User.findOneAndUpdate(
-                { _id: params.username },
-                { $pull: { thoughts: params.thoughtId } },
-                { new: true }
-            );
+        User.findOneAndDelete({ _id: params.id })
+        .then((dbUserData) => {
+            if (!dbUserData) {
+                res.status(404).json({ message: "Cannot find thought with this id."});
+                return;
+            } 
+            User.updateMany(
+                { _id: { $in: dbUserData.friends } },
+                { $pull: { friends: params.id } }
+            )
+            .then(() => {
+                Thought.deleteMany({ username: dbUserData.username })
+                .then(() => {
+                    res.json({ message: "User deleted successfully" });
+                })
+                .catch((err) => res.status(400).json(err));
+            })
+            .catch((err) => res.status(400).json(err));
         })
-        .then(dbUserData => {
-            res.json(dbUserData);
-        })
-        .catch(err => res.json(err));
+        .catch((err) => res.status(400).json(err));
     },
     addFriend({ params }, res) {
         console.log("INCOMING BODY", body)
