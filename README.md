@@ -37,7 +37,7 @@ Explore the back end product's functionality in insomnia by executing the action
 
 ![Walkthrough](./assets/gifs/walkthrough1.gif)
 
-A video walkthrough is also available if you follow this [link](https://youtu.be/v-NW6WWG8fc).
+A video walkthrough is also available if you follow this [link](https://youtu.be/uUKJB80Ntls).
 
 ## Thoughts:
 ```bash
@@ -49,7 +49,7 @@ A video walkthrough is also available if you follow this [link](https://youtu.be
 
 ![Walkthrough](./assets/gifs/walkthrough2.gif)
 
-A video walkthrough is also available if you follow this [link](https://youtu.be/v-NW6WWG8fc).
+A video walkthrough is also available if you follow this [link](https://youtu.be/KyzR6aoUX8M).
 
 ## Reactions:
 ```bash
@@ -59,7 +59,7 @@ A video walkthrough is also available if you follow this [link](https://youtu.be
 
 ![Walkthrough](./assets/gifs/walkthrough3.gif)
 
-A video walkthrough is also available if you follow this [link](https://youtu.be/v-NW6WWG8fc).
+A video walkthrough is also available if you follow this [link](https://youtu.be/nPPnh3VDotU).
 
 ## Friends:
 ```bash
@@ -67,9 +67,9 @@ A video walkthrough is also available if you follow this [link](https://youtu.be
 - Add A New Friend
 ```
 
-![Walkthrough](./assets/gifs/walkthrough.gif)
+![Walkthrough](./assets/gifs/walkthrough4.gif)
 
-A video walkthrough is also available if you follow this [link](https://youtu.be/v-NW6WWG8fc).
+A video walkthrough is also available if you follow this [link](https://youtu.be/1YR1PN3nEbI).
 
 # License 
 [License: MIT](https://opensource.org/licenses/MIT) 
