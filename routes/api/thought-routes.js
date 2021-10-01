@@ -1,7 +1,6 @@
 //require express for routing api
 const router = require('express').Router();
 
-const { route } = require('.');
 //connect to functions in controller
 const{
     getAllThoughts,

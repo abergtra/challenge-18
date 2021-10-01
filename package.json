@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/abergtra/challenge-18/issues"
   },
-  "homepage": "https://github.com/abergtra/challenge-18#readme"
+  "homepage": "https://github.com/abergtra/challenge-18#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^4.1.2",
+    "mongoose": "^6.0.8",
+    "mongoose-legacy-pluralize": "^1.0.2"
+  }
 }
