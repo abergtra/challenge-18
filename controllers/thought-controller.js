@@ -51,7 +51,7 @@ const thoughtController = {
     },
     //delete an existing thought
     deleteThought({ params }, res) {
-        Thought.findOneAndDelete({ _id: params.thoughtID})
+        Thought.findOneAndDelete({ _id: params.thoughtId})
         .then(deletedthought => {
             if (!deletedthought) {
                 return res.status(404).json({ message: "Cannot find thought with this id."});
@@ -85,11 +85,17 @@ const thoughtController = {
     },
     //delete an existing reactioin
     deleteReaction({ params }, res){
-        Thought.findOneAndUpdate(
-            { _id: params.thoughtId },
-            { $push: { reactions: { reactionId: params.reactionId } } },
-            { new: true }
-        )
+        Thought.findOneAndDelete({ _id: params.thoughtId.reactionId})
+        .then(deletedreaction => {
+            if (!deletedreaction) {
+                return res.status(404).json({ message: "Cannot find reaction with this id."});
+            } return Thought.findOneAndUpdate(
+                { _id: params.thoughtId },
+                { $push: { reactions: { reactionId: params.reactionId } } },
+                { new: true }
+            );
+        })
+        
         .then(dbUserData => res.json(dbUserData))
         .catch(err => res.json(err));
     }
