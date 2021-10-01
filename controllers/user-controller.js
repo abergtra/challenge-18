@@ -79,7 +79,7 @@ const userController = {
         .catch((err) => res.status(400).json(err));
     },
     addFriend({ params }, res) {
-        User.findByIDAndUpdate(
+        User.findByIdAndUpdate(
             { _id: params.id },
             { $addToSet: { friends: params.friendId } },
             { new: true }
@@ -97,7 +97,7 @@ const userController = {
         });
     },
     deleteFriend({ params }, res){
-        User.findByIDAndUpdate(
+        User.findByIdAndUpdate(
             { _id: params.id },
             { $pull: { friends: params.friendId } },
             { new: true, runValidators: true }
